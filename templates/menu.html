@@ -1,0 +1,43 @@
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+		<meta charset="utf-8">
+		<title>Main menu</title>
+		<link rel="stylesheet" href="style.css">
+
+</head>
+<style>
+	body {
+		backdrop-filter: blur(4px);
+		background-image:url('https://fullhdoboi.ru/wp-content/uploads/_ph/28/813282176.jpg');
+		background-color: #c7b39b;
+		   }
+	.design {
+    	display: inline-block; /* Строчно-блочный элемент */
+    	padding: 5px 20px; /* Добавляем поля */
+    	text-decoration: none; /* Убираем подчёркивание у ссылки */
+    	cursor: pointer; /* Курсор в виде руки */
+    	background: #ffe; /* Фон для браузеров, не поддерживающих градиент */
+    	border-radius: 10px; /* Скругляем уголки */
+    	border: 1px solid #A52A2A; /* Добавляем синюю рамку */
+    	font: 12px/1 Arial, sans-serif; /* Рубленый шрифт */
+    	color: #A52A2A; /* Цвет текста */
+    	font-weight: bold;
+		font-size: 26px;
+	}
+	li a:hover {
+    color: #ffe; /* Цвет текста активного пункта */
+    background-color: #A52A2A; /* Цвет фона активного пункта */
+   }
+    li {
+    list-style-type: none; /* Убираем маркеры */
+   }
+</style>
+<body align=center>
+	  <div class = "content">
+		  {%for m in menu%}
+		<li> <a href = "{{m.url}}"class="design">{{m.name}}</a></li> <br><br><br>
+		{%endfor%}
+	</div>
+</body>
+</html>

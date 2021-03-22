@@ -1,0 +1,92 @@
+<html>
+<style>
+	body {
+
+		background-color: #c7b39b;
+		   }
+	.request-box {
+    	display: inline-block; /* Строчно-блочный элемент */
+    	padding: 5px 20px; /* Добавляем поля */
+    	text-decoration: none; /* Убираем подчёркивание у ссылки */
+    	cursor: pointer; /* Курсор в виде руки */
+    	background: #ffe; /* Фон для браузеров, не поддерживающих градиент */
+    	border-radius: 10px; /* Скругляем уголки */
+    	border: 1px solid #A52A2A; /* Добавляем синюю рамку */
+    	font: 12px/1 Arial, sans-serif; /* Рубленый шрифт */
+    	color: #A52A2A; /* Цвет текста */
+    	font-weight: bold;
+		font-size: 26px;
+	}
+	li a:hover {
+    color: #ffe; /* Цвет текста активного пункта */
+    background-color: #A52A2A; /* Цвет фона активного пункта */
+   }
+    li {
+    list-style-type: none; /* Убираем маркеры */
+   }
+   TABLE {
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    width: 300px; /* Ширина таблицы */
+   }
+
+   TD {
+    background: #fff; /* Цвет фона ячеек */
+    text-align: center; /* Выравнивание по центру */
+   }
+   TH, TD {
+    border: 1px solid black; /* Параметры рамки */
+    padding: 4px; /* Поля вокруг текста */
+   }
+
+    .button {
+	    display: inline-block; /* Строчно-блочный элемент */
+    	padding: 5px 20px; /* Добавляем поля */
+    	text-decoration: none; /* Убираем подчёркивание у ссылки */
+    	cursor: pointer; /* Курсор в виде руки */
+    	background: #ffe; /* Фон */
+    	border-radius: 10px; /* Скругляем уголки */
+    	border: 3px solid #A52A2A; /* Добавляем рамку */
+    	font: 12px/1 Arial, sans-serif; /* Рубленый шрифт */
+    	color: #A52A2A; /* Цвет текста */
+    	font-weight: bold;
+		font-size: 18px;
+    }
+    	.design {
+    	padding: 5px 20px; /* Добавляем поля */
+    	text-decoration: none; /* Убираем подчёркивание у ссылки */
+    	background: #ffe; /* Фон */
+    	font: 12px/1 Arial, sans-serif; /* Рубленый шрифт */
+    	color: #A52A2A; /* Цвет текста */
+    	font-weight: bold;
+		font-size: 26px;
+	}
+    .button:hover {
+    color: #ffe; /* Цвет текста активного пункта */
+    background-color: #A52A2A; /* Цвет фона активного пункта */
+   }
+</style>
+<body>
+<form action="" method=POST  align = "center">
+  <div class = "request-box">
+    <table border = 1  >
+      <tr>
+           <td align = center class = "design"> Название </td>
+        </tr>
+        {%for str in pizzas%}
+        <tr>
+           <td align=center class = "design">{{str.name}}</td>
+             <input type = hidden name = toDel value={{str.name}}>
+             <td><input type = submit value = 'Удалить' name = 'delete' class = "button"></td>
+          <td><input type = submit value = 'Редактировать' name = 'redact' class = "button"></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+      <input type = submit value = 'Добавить пиццу' name = 'add_pizza' class = "button">
+      <br>
+      <br>
+    <a href = "/menu" class = "button">Назад в меню</a>
+  </div></form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Процедура</title>
+</head>
+<style>
+	body {
+		background-color: silver
+	}
+</style>
+<body align=center>
+ <h2>отчет для анализа того, сколько блюд было заказано в выбранно году</h2>
+ <br><br>
+	<table border =1 width = 50% style="margin-left: 100px; margin-top: 50px; ">
+      <tr>
+         <td align = center> id </td>
+         <td align = center> Название </td>
+         <td align = center> Цена </td>
+         <td align = center> Месяц </td>
+      </tr>
+	{%for employee in employees%}
+      <tr>
+         <td align=center>{{employee['id']}}</td>
+         <td align=center>{{employee['sold']}}</td>
+         <td align=center>{{employee['month']}}</td>
+         <td align=center>{{employee['year']}}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    <a href="/menu">Назад в меню</a>
+</body>
+</html>

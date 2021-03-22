@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <title>Working with db</title>
+   </head>
+   <style>
+	body {
+		background-color: silver
+	}
+</style>
+<body align=center>
+      <h2>отчет о заказах в марте 2017 года</h2>
+      <br><br>
+      <table border =1 width = 80% style="margin-left: 100px;">
+      <tr>
+         <td align = center> id_dish </td>
+         <td align = center> title </td>
+         <td align = center> count </td>
+         <td align = center> sum </td>
+      </tr>
+      {%for blank in blanks%}
+      <tr>
+         <td align=center>{{blank['id_dish']}}</td>
+         <td align=center>{{blank['title']}}</td>
+         <td align=center>{{blank['count']}}</td>
+         <td align=center>{{blank['sum']}}</td>
+      </tr>
+      {% endfor %}
+      </table>
+   </body>
+</html>
