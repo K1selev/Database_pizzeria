@@ -1,12 +1,12 @@
 # pizzeria
 ***
-######working with DB
+###### working with DB
 
-######Бизнес-логика
+###### Бизнес-логика
 клиент обращается в пиццерию, 
 директор добавляет пользователя в бд, 
 выдает клиенту логин-пароль, 
 пользователь оформляет заказ
 
-#####Скриншот 
-![alt text](https://github.com/K1selev/pizzeria/pizzeria.png)
+###### Скриншот 
+![alt text](https://github.com/K1selev/pizzeria/blob/main/pizzeria.png)
