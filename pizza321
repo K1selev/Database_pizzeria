@@ -1,0 +1,342 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.25
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema pizza321
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ pizza321;
+USE pizza321;
+
+--
+-- Table structure for table `pizza321`.`cl_order`
+--
+
+DROP TABLE IF EXISTS `cl_order`;
+CREATE TABLE `cl_order` (
+  `id_clo` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_r` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_clo`),
+  KEY `FK_cl_order_1` (`id_r`),
+  CONSTRAINT `FK_cl_order_1` FOREIGN KEY (`id_r`) REFERENCES `restaurants` (`id_r`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`cl_order`
+--
+
+/*!40000 ALTER TABLE `cl_order` DISABLE KEYS */;
+INSERT INTO `cl_order` (`id_clo`,`id_r`) VALUES 
+ (1,1),
+ (2,1),
+ (8,1),
+ (9,1),
+ (10,1),
+ (11,1),
+ (12,1);
+/*!40000 ALTER TABLE `cl_order` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`client`
+--
+
+DROP TABLE IF EXISTS `client`;
+CREATE TABLE `client` (
+  `id_client` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Adress` varchar(45) NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_client`),
+  CONSTRAINT `FK_Client` FOREIGN KEY (`id_client`) REFERENCES `order` (`id_order`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pizza321`.`client`
+--
+
+/*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` (`id_client`,`Adress`,`Name`) VALUES 
+ (1,'г.Москва','Василий');
+/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`courier`
+--
+
+DROP TABLE IF EXISTS `courier`;
+CREATE TABLE `courier` (
+  `id_courier` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Rect_Date` date NOT NULL,
+  `Dism_Date` date DEFAULT NULL,
+  `Passport` varchar(45) NOT NULL,
+  `Birthdate` date NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_courier`),
+  CONSTRAINT `FK_Courier` FOREIGN KEY (`id_courier`) REFERENCES `order` (`id_order`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pizza321`.`courier`
+--
+
+/*!40000 ALTER TABLE `courier` DISABLE KEYS */;
+INSERT INTO `courier` (`id_courier`,`Rect_Date`,`Dism_Date`,`Passport`,`Birthdate`,`Name`) VALUES 
+ (1,'2017-03-03','0000-00-00','12344322','2000-12-12','Олег');
+/*!40000 ALTER TABLE `courier` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`del_order`
+--
+
+DROP TABLE IF EXISTS `del_order`;
+CREATE TABLE `del_order` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `dish_name` varchar(45) NOT NULL DEFAULT '',
+  `amount` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`del_order`
+--
+
+/*!40000 ALTER TABLE `del_order` DISABLE KEYS */;
+INSERT INTO `del_order` (`id`,`dish_name`,`amount`) VALUES 
+ (1,'pizza','2'),
+ (2,'super-pizza','2'),
+ (3,'sushi','3');
+/*!40000 ALTER TABLE `del_order` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`dish`
+--
+
+DROP TABLE IF EXISTS `dish`;
+CREATE TABLE `dish` (
+  `id_dish` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Menu` int(10) unsigned DEFAULT NULL,
+  `Title` varchar(45) NOT NULL,
+  `Price` int(10) unsigned NOT NULL,
+  `Weight` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_dish`),
+  KEY `FK_dish_2` (`Menu`),
+  CONSTRAINT `FK_Dish` FOREIGN KEY (`id_dish`) REFERENCES `order` (`id_order`),
+  CONSTRAINT `FK_dish_2` FOREIGN KEY (`Menu`) REFERENCES `menu` (`id_menu`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pizza321`.`dish`
+--
+
+/*!40000 ALTER TABLE `dish` DISABLE KEYS */;
+INSERT INTO `dish` (`id_dish`,`Menu`,`Title`,`Price`,`Weight`) VALUES 
+ (1,1,'peperoni',321,122),
+ (2,2,'govno',5,150);
+/*!40000 ALTER TABLE `dish` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`dishes`
+--
+
+DROP TABLE IF EXISTS `dishes`;
+CREATE TABLE `dishes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`dishes`
+--
+
+/*!40000 ALTER TABLE `dishes` DISABLE KEYS */;
+INSERT INTO `dishes` (`id`,`name`) VALUES 
+ (6,'peperoni'),
+ (7,'margarita');
+/*!40000 ALTER TABLE `dishes` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `id_menu` int(10) unsigned NOT NULL DEFAULT '0',
+  `Name` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_menu`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`menu`
+--
+
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` (`id_menu`,`Name`) VALUES 
+ (1,'pizza'),
+ (2,'nepizza');
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `id_order` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Delivery_Time` datetime NOT NULL,
+  `Cost` int(10) unsigned NOT NULL,
+  `id_dish` int(10) unsigned NOT NULL,
+  `id_courier` int(10) unsigned NOT NULL,
+  `id_client` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id_order`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pizza321`.`order`
+--
+
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` (`id_order`,`Delivery_Time`,`Cost`,`id_dish`,`id_courier`,`id_client`) VALUES 
+ (1,'2012-03-20 00:00:00',123,1,1,1),
+ (2,'2017-03-03 00:00:00',312,1,1,1),
+ (3,'2012-03-15 00:00:00',1,1,1,1),
+ (4,'2012-03-10 00:00:00',5,2,2,2);
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`otchet`
+--
+
+DROP TABLE IF EXISTS `otchet`;
+CREATE TABLE `otchet` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `o_id_dish` int(10) unsigned NOT NULL DEFAULT '0',
+  `o_title` varchar(45) NOT NULL DEFAULT '',
+  `o_am_sold` int(10) unsigned NOT NULL DEFAULT '0',
+  `o_price` int(10) unsigned NOT NULL DEFAULT '0',
+  `o_ov_cost` int(10) unsigned NOT NULL DEFAULT '0',
+  `month` varchar(45) NOT NULL DEFAULT '',
+  `year` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `FK_otchet_1` (`o_id_dish`),
+  CONSTRAINT `FK_otchet_1` FOREIGN KEY (`o_id_dish`) REFERENCES `dish` (`id_dish`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`otchet`
+--
+
+/*!40000 ALTER TABLE `otchet` DISABLE KEYS */;
+INSERT INTO `otchet` (`id`,`o_id_dish`,`o_title`,`o_am_sold`,`o_price`,`o_ov_cost`,`month`,`year`) VALUES 
+ (4,1,'peperoni',2,321,642,'3','2012'),
+ (5,2,'govno',1,5,5,'3','2012'),
+ (6,1,'peperoni',1,321,321,'3','2017'),
+ (7,1,'peperoni',1,321,321,'03','2017'),
+ (8,1,'peperoni',1,321,321,'03','2017'),
+ (9,1,'peperoni',1,321,321,'03','2017');
+/*!40000 ALTER TABLE `otchet` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`restaurants`
+--
+
+DROP TABLE IF EXISTS `restaurants`;
+CREATE TABLE `restaurants` (
+  `id_r` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `address` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_r`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`restaurants`
+--
+
+/*!40000 ALTER TABLE `restaurants` DISABLE KEYS */;
+INSERT INTO `restaurants` (`id_r`,`address`) VALUES 
+ (1,'pupka'),
+ (2,'ne_pupka');
+/*!40000 ALTER TABLE `restaurants` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`sys_table`
+--
+
+DROP TABLE IF EXISTS `sys_table`;
+CREATE TABLE `sys_table` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `login` varchar(45) NOT NULL DEFAULT '',
+  `password` varchar(45) NOT NULL DEFAULT '',
+  `gr_log` varchar(45) NOT NULL DEFAULT '',
+  `gr_pass` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pizza321`.`sys_table`
+--
+
+/*!40000 ALTER TABLE `sys_table` DISABLE KEYS */;
+INSERT INTO `sys_table` (`id`,`login`,`password`,`gr_log`,`gr_pass`) VALUES 
+ (1,'director','director','director','dir'),
+ (2,'client','client','client3','client');
+/*!40000 ALTER TABLE `sys_table` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `pizza321`.`take_away`
+--
+
+DROP TABLE IF EXISTS `take_away`;
+CREATE TABLE `take_away` (
+  `id_ta` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL DEFAULT '0',
+  `amount` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_clo` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_sys` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_ta`),
+  KEY `FK_take_away_1` (`id_sys`),
+  KEY `FK_take_away_2` (`id_clo`),
+  KEY `FK_take_away_3` (`id`),
+  CONSTRAINT `FK_take_away_1` FOREIGN KEY (`id_sys`) REFERENCES `sys_table` (`id`),
+  CONSTRAINT `FK_take_away_2` FOREIGN KEY (`id_clo`) REFERENCES `cl_order` (`id_clo`),
+  CONSTRAINT `FK_take_away_3` FOREIGN KEY (`id`) REFERENCES `dishes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pizza321`.`take_away`
+--
+
+/*!40000 ALTER TABLE `take_away` DISABLE KEYS */;
+INSERT INTO `take_away` (`id_ta`,`id`,`amount`,`id_clo`,`id_sys`) VALUES 
+ (1,7,2,12,2);
+/*!40000 ALTER TABLE `take_away` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
